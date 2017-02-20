@@ -1,0 +1,13 @@
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
+
+node_types:
+  tosca.nodes.nfv.VNF.Juniper:
+    requirements:
+      - virtualLink1:
+          capability: tosca.capabilities.nfv.VirtualLinkable
+          relationship: tosca.relationships.nfv.VirtualLinksTo
+          node: tosca.nodes.nfv.VL    
+      - virtualLink2:
+          capability: tosca.capabilities.nfv.VirtualLinkable
+          relationship: tosca.relationships.nfv.VirtualLinksTo
+          node: tosca.nodes.nfv.VL

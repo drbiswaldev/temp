@@ -1,0 +1,46 @@
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
+
+description: NPaaS Network Service
+metadata:
+  template_name: NPaaS
+  template_type: NS
+  ID: NPaaS
+  vendor: Oracle
+  version: 1.0
+imports:
+  - Juniper_vSRX_definition.yaml
+  - Juniper_vSRX.yaml
+
+topology_template:
+  node_templates:     
+    Juniper_vSRX:
+      type: tosca.nodes.nfv.VNF.Juniper
+      requirements:
+        - virtualLink1: data
+        - virtualLink2: mgmt
+
+    data:
+      type: tosca.nodes.nfv.VL
+      properties:
+        network_name: data
+        vendor: Oracle
+
+    mgmt:
+      type: tosca.nodes.nfv.VL
+      properties:
+        network_name: mgmt
+        vendor: Oracle
+
+            
+  policies:
+    - ScalingPolicy:
+        type: tosca.policies.tacker.Scaling
+        properties:
+          increment: 1
+          min_instances: 1
+          max_instances: 3
+          default_instances: 1
+          targets: [Juniper_vSRX]
+
+    
+    

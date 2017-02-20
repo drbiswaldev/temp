@@ -1,0 +1,52 @@
+tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
+
+description: juniper vSRX firewall
+
+imports:
+  - D:\PyDevWorkspace\SampleToscaTemplate\nfv\ns\Juniper_vSRX_definition.yaml # Replace <Full directory Path of this file> with full path of directory containing Juniper_vSRX_definition.yaml file
+  
+topology_template:
+  substitution_mappings:
+     node_type: tosca.nodes.nfv.VNF.Juniper
+     requirements:
+        virtualLink1: [CP01, CP02, virtualLink]
+        virtualLink2: [CP03, virtualLink]
+  node_templates:     
+    Juniper_vSRX_VDU:
+      type: tosca.nodes.nfv.VDU.Tacker
+      capabilities:
+        host:
+           properties:
+             num_cpus: 2
+             mem_size: 24 MB
+             disk_size: 40 GB
+      properties:
+        image: vsrx-12.1X47-D20.7-npaas-v0.3
+      
+    CP03:
+      type: tosca.nodes.nfv.CP.Tacker
+      properties:
+        management: true
+        order: 0
+      requirements:
+        - virtualBinding:
+            node: Juniper_vSRX_VDU
+
+    CP02:
+      type: tosca.nodes.nfv.CP.Tacker
+      properties:
+        order: 1
+      requirements:
+        - virtualBinding:
+            node: Juniper_vSRX_VDU
+
+    CP01:
+      type: tosca.nodes.nfv.CP.Tacker
+      properties:
+        order: 2
+      requirements:
+        - virtualBinding:
+            node: Juniper_vSRX_VDU
+            
+    
+    
