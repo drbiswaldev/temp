@@ -8,8 +8,8 @@ metadata:
   vendor: Oracle
   version: 1.0
 imports:
-  - Juniper_vSRX_definition.yaml
-  - Juniper_vSRX.yaml
+  - https://raw.githubusercontent.com/drbiswaldev/temp/blob/master/ns/Juniper_vSRX_definition.yaml
+  - https://raw.githubusercontent.com/drbiswaldev/temp/blob/master/ns/Juniper_vSRX.yaml
 
 topology_template:
   node_templates:     

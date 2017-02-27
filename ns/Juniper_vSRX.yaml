@@ -3,7 +3,7 @@ tosca_definitions_version: tosca_simple_profile_for_nfv_1_0_0
 description: juniper vSRX firewall
 
 imports:
-  - D:\PyDevWorkspace\SampleToscaTemplate\nfv\ns\Juniper_vSRX_definition.yaml # Replace <Full directory Path of this file> with full path of directory containing Juniper_vSRX_definition.yaml file
+  - https://raw.githubusercontent.com/drbiswaldev/temp/blob/master/ns/Juniper_vSRX_definition.yaml # Replace <Full directory Path of this file> with full path of directory containing Juniper_vSRX_definition.yaml file
   
 topology_template:
   substitution_mappings:
